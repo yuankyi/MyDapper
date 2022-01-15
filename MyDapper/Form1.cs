@@ -120,5 +120,30 @@ namespace MyDapper
         {
             Utility.TransactionDapper();
         }
+
+        private void btnBulkInsert_Click(object sender, EventArgs e)
+        {
+            Bulk.BulkInsert();
+        }
+
+        private void btnBulkUpdate_Click(object sender, EventArgs e)
+        {
+            Bulk.BulkUpdate();
+        }
+
+        private void btnBulkDelete_Click(object sender, EventArgs e)
+        {
+            Bulk.BulkDelete();
+        }
+
+        private void btnBulkMerge_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnContrib_Click(object sender, EventArgs e)
+        {
+            Contrib.Method();
+        }
     }
 }

@@ -51,17 +51,40 @@ namespace MyDapper.Methods
                     new { CustomerId = 3, CustomerName = "Third" } }
                 );
                 My.Write("update many: " + affectedRows);
+
+                var coustomers = new List<Customer>
+                {
+                    new Customer {CustomerID=4, CustomerName="Cat1"},
+                    new Customer { CustomerID=5,CustomerName="Cat2"},
+                    new Customer {CustomerID=6, CustomerName="Cat3"},
+                };
+                affectedRows = connection.Execute(sql, coustomers);
+                My.Write("update entities: " + affectedRows);
             }
         }
 
         public static void ExecuteDELETE()
         {
             string sql = "delete from customers where customerid in (select max(customerid)customerid from customers) ;";
+            string sql2 = "delete from customers where customerid=@customerid";
+            string sql3 = "delete from customers where customerid in @customerid3";
 
             using (var connection = My.ConnectionFactory())
             {
                 var affectedRows = connection.Execute(sql);
                 My.Write("delete: " + affectedRows);
+
+                var coustomers = new List<Customer>
+                {
+                    new Customer {CustomerID=24 },
+                    new Customer { CustomerID=25 },
+                    new Customer {CustomerID=26 },
+                };
+                affectedRows = connection.Execute(sql2, coustomers);
+                My.Write("delete entities: " + affectedRows);
+
+                affectedRows = connection.Execute(sql3, new { customerid3 = new[] { 21, 22, 23 } });
+                My.Write("delete list: " + affectedRows);
             }
         }
 

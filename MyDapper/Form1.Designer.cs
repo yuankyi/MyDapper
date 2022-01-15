@@ -46,14 +46,22 @@
             this.btnQueryMultiType = new System.Windows.Forms.Button();
             this.btnQueryMultiMapping = new System.Windows.Forms.Button();
             this.btnQueryMultiResult = new System.Windows.Forms.Button();
+            this.btnBulkInsert = new System.Windows.Forms.Button();
+            this.btnBulkUpdate = new System.Windows.Forms.Button();
+            this.btnBulkDelete = new System.Windows.Forms.Button();
+            this.btnBulkMerge = new System.Windows.Forms.Button();
+            this.btnContrib = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtOutput
             // 
+            this.txtOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtOutput.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtOutput.Location = new System.Drawing.Point(33, 120);
+            this.txtOutput.Location = new System.Drawing.Point(33, 151);
             this.txtOutput.Name = "txtOutput";
-            this.txtOutput.Size = new System.Drawing.Size(591, 129);
+            this.txtOutput.Size = new System.Drawing.Size(591, 125);
             this.txtOutput.TabIndex = 1;
             this.txtOutput.Text = "";
             // 
@@ -227,11 +235,66 @@
             this.btnQueryMultiResult.UseVisualStyleBackColor = true;
             this.btnQueryMultiResult.Click += new System.EventHandler(this.btnQueryMultResult_Click);
             // 
+            // btnBulkInsert
+            // 
+            this.btnBulkInsert.Location = new System.Drawing.Point(33, 112);
+            this.btnBulkInsert.Name = "btnBulkInsert";
+            this.btnBulkInsert.Size = new System.Drawing.Size(75, 23);
+            this.btnBulkInsert.TabIndex = 20;
+            this.btnBulkInsert.Text = "BulkInsert";
+            this.btnBulkInsert.UseVisualStyleBackColor = true;
+            this.btnBulkInsert.Click += new System.EventHandler(this.btnBulkInsert_Click);
+            // 
+            // btnBulkUpdate
+            // 
+            this.btnBulkUpdate.Location = new System.Drawing.Point(114, 112);
+            this.btnBulkUpdate.Name = "btnBulkUpdate";
+            this.btnBulkUpdate.Size = new System.Drawing.Size(75, 23);
+            this.btnBulkUpdate.TabIndex = 21;
+            this.btnBulkUpdate.Text = "BulkUpdate";
+            this.btnBulkUpdate.UseVisualStyleBackColor = true;
+            this.btnBulkUpdate.Click += new System.EventHandler(this.btnBulkUpdate_Click);
+            // 
+            // btnBulkDelete
+            // 
+            this.btnBulkDelete.Location = new System.Drawing.Point(195, 112);
+            this.btnBulkDelete.Name = "btnBulkDelete";
+            this.btnBulkDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnBulkDelete.TabIndex = 22;
+            this.btnBulkDelete.Text = "BulkDelete";
+            this.btnBulkDelete.UseVisualStyleBackColor = true;
+            this.btnBulkDelete.Click += new System.EventHandler(this.btnBulkDelete_Click);
+            // 
+            // btnBulkMerge
+            // 
+            this.btnBulkMerge.Location = new System.Drawing.Point(276, 112);
+            this.btnBulkMerge.Name = "btnBulkMerge";
+            this.btnBulkMerge.Size = new System.Drawing.Size(75, 23);
+            this.btnBulkMerge.TabIndex = 23;
+            this.btnBulkMerge.Text = "BulkMerge";
+            this.btnBulkMerge.UseVisualStyleBackColor = true;
+            this.btnBulkMerge.Click += new System.EventHandler(this.btnBulkMerge_Click);
+            // 
+            // btnContrib
+            // 
+            this.btnContrib.Location = new System.Drawing.Point(357, 112);
+            this.btnContrib.Name = "btnContrib";
+            this.btnContrib.Size = new System.Drawing.Size(163, 23);
+            this.btnContrib.TabIndex = 24;
+            this.btnContrib.Text = "Contrib";
+            this.btnContrib.UseVisualStyleBackColor = true;
+            this.btnContrib.Click += new System.EventHandler(this.btnContrib_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(651, 261);
+            this.ClientSize = new System.Drawing.Size(651, 299);
+            this.Controls.Add(this.btnContrib);
+            this.Controls.Add(this.btnBulkMerge);
+            this.Controls.Add(this.btnBulkDelete);
+            this.Controls.Add(this.btnBulkUpdate);
+            this.Controls.Add(this.btnBulkInsert);
             this.Controls.Add(this.btnQueryMultiResult);
             this.Controls.Add(this.btnQueryMultiMapping);
             this.Controls.Add(this.btnQueryMultiType);
@@ -251,6 +314,7 @@
             this.Controls.Add(this.btnExeInsert);
             this.Controls.Add(this.txtOutput);
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.ResumeLayout(false);
 
@@ -275,6 +339,11 @@
         private System.Windows.Forms.Button btnQueryMultiType;
         private System.Windows.Forms.Button btnQueryMultiMapping;
         private System.Windows.Forms.Button btnQueryMultiResult;
+        private System.Windows.Forms.Button btnBulkInsert;
+        private System.Windows.Forms.Button btnBulkUpdate;
+        private System.Windows.Forms.Button btnBulkDelete;
+        private System.Windows.Forms.Button btnBulkMerge;
+        private System.Windows.Forms.Button btnContrib;
     }
 }
 
