@@ -15,7 +15,7 @@ namespace MyDapper.Methods
             {
                 //Get<T> only supports an entity with a [Key] or an [ExplicitKey] property
                 var customer = connection.Get<Customer>(1);
-                My.Write("get : " + customer.CustomerName);
+                My.Write("get : " + customer.CustomerName + "," + customer.Country + "," + customer.City + "," + customer.PostalCode);
 
                 var customers = connection.GetAll<Customer>().ToList();
                 My.Write("get all : " + customers.Count);
@@ -27,12 +27,21 @@ namespace MyDapper.Methods
                 var affectedRows = connection.Insert(
                   new List<Customer>
                   {
-                        new Customer { CustomerName = "Magdalen", ContactName = "Mae" },
-                        new Customer { CustomerName = "Magdalen", ContactName = "Mae" }
+                      //Country write=false , 不会保存到数据库
+                        new Customer { CustomerName = "Magdalen", ContactName = "Mae",City = "guangzhou",Country = "chinan",PostalCode="12345" },
+                        new Customer { CustomerName = "Magdalen", ContactName = "Mae",City = "guangzhou",Country = "chinan",PostalCode="12345" }
                   });
                 My.Write("insert many : " + affectedRows);
 
-                var isSuccess = connection.Update(new Customer { CustomerID = 11, CustomerName = "Lacey", ContactName = "Lea" });
+                var isSuccess = connection.Update(new Customer
+                {
+                    CustomerID = 11,
+                    CustomerName = "Lacey",
+                    ContactName = "Lea",
+                    City = "guangzhou",
+                    Country = "chinan",//Country write=false , 不会保存到数据库
+                    PostalCode = "12345",
+                });
                 My.Write("update single : " + isSuccess);
 
                 isSuccess = connection.Update(

@@ -138,7 +138,7 @@ namespace MyDapper
 
         private void btnBulkMerge_Click(object sender, EventArgs e)
         {
-
+            Bulk.BulkMerge();
         }
 
         private void btnContrib_Click(object sender, EventArgs e)

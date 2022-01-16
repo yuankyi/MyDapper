@@ -175,5 +175,85 @@ namespace MyDapper.Methods
                 My.Write("bulk delete with relation (one to many)");
             }
         }
+
+        /// <summary>
+        /// An IDbConnection extension method to MERGE (Upsert) entities in a database table or a view.
+        /// </summary>
+        public static void BulkMerge()
+        {
+            //建立对象与表的映射关系
+            DapperPlusManager.Entity<Customer>().Table("Customers");
+            //Identity:Sets identity accessor from the selectors. 加了才会回写对象属性值
+            DapperPlusManager.Entity<Supplier>().Table("Suppliers").Identity(m => m.SupplierID);
+            DapperPlusManager.Entity<Product>().Table("Products").Identity(m => m.ProductID);
+
+            //update
+            var customer = new Customer() { CustomerID = 30, CustomerName = "Lux", ContactName = "Lux" };
+
+            var customers = new List<Customer>();
+            //update
+            customers.Add(new Customer() { CustomerID = 31, CustomerName = "Diana", ContactName = "Diana" });
+            customers.Add(new Customer() { CustomerID = 32, CustomerName = "Leona", ContactName = "Leona" });
+            //insert
+            customers.Add(new Customer() { CustomerName = "Fiora", ContactName = "Fiora" });
+
+            var supplier1 = new Supplier
+            {
+                SupplierID = 29,
+                SupplierName = "SX001",
+                MainProduct = new Product { ProductID = 30, SupplierID = 29, ProductName = "PX001" }
+            };
+            var suppliers = new List<Supplier>
+            {
+                new Supplier
+                {
+                    SupplierID = 31,
+                    SupplierName = "SX002",
+                    MainProduct = new Product { ProductID = 34,SupplierID = 31, ProductName = "PX002" }
+                },
+                new Supplier
+                {
+                    SupplierID = 32,
+                    SupplierName = "SX003",
+                    MainProduct = new Product { ProductID = 35, SupplierID = 32,ProductName = "PX003"}
+                },
+                new Supplier
+                {
+                    SupplierName = "SX004",
+                    MainProduct = new Product {ProductName = "PX004"}
+                }
+            };
+
+            var supplier2 = new Supplier
+            {
+                SupplierID = 30,
+                SupplierName = "SX005",
+                Products = new List<Product>
+                {
+                    new Product {ProductID=31 , SupplierID = 30,ProductName = "PX005" },
+                    new Product {ProductID=32, SupplierID = 30,ProductName = "PX005" }
+                }
+            };
+
+            using (var connection = My.ConnectionFactory())
+            {
+                connection.BulkMerge(customer);
+                My.Write("bulk merge single");
+
+                //同时执行update和insert
+                connection.BulkMerge(customers);
+                My.Write("bulk merge many");
+
+                connection.BulkMerge(supplier1).BulkMerge(supplier1.MainProduct);
+                My.Write("bulk merge with relation (one to one / single)");
+
+                connection.BulkMerge(suppliers).BulkMerge(suppliers.Select(m => m.MainProduct));
+                connection.BulkMerge(suppliers).ThenForEach(m => m.MainProduct.SupplierID = m.SupplierID).ThenBulkMerge(x => x.MainProduct);
+                My.Write("bulk merge with relation (one to one / many)");
+
+                connection.BulkMerge(supplier2.Products).BulkMerge(supplier2);
+                My.Write("bulk merge with relation (one to many)");
+            }
+        }
     }
 }

@@ -25,8 +25,14 @@ namespace MyDapper
         public string ContactName { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
+        [Computed]//计算字段,不会保存到数据库
         public string PostalCode { get; set; }
+        [Write(false)]//不会保存到数据库
         public string Country { get; set; }
+
+        //非数据库字段
+        [Computed, Write(false)]
+        public string Secret { get; set; }
     }
 
     public class OrderDetail
